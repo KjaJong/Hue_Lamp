@@ -37,6 +37,7 @@ namespace HueXamlApp.Pages
 
             if (UsernameTextBox.Text == "") return;
             Connector = new HueConnector(IpTextBox.Text, UsernameTextBox.Text);
+            Frame.Navigate(typeof(LightsPage));
         }
 
         private void Party_OnClick(object sender, RoutedEventArgs e)

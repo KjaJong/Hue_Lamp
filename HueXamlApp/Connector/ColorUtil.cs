@@ -21,6 +21,9 @@ namespace HughRemote.Common
         //    return Color.FromArgb(255, Convert.ToByte(r), Convert.ToByte(g), Convert.ToByte(b));
         //}
 
+            /// <summary>
+            /// The hue decided it doesn't work with normal hsv. So it had to be changed.
+            /// </summary>
         public static void RGBtoHSV(double r, double g, double b, out double h, out double s, out double v)
         {
             double min, max, delta;
@@ -28,11 +31,11 @@ namespace HughRemote.Common
             min = Math.Min(r, Math.Min(g, b));
             max = Math.Max(r, Math.Max(g, b));
 
-            v = max;				// v
+            v = max;				// v variates between 0 - 255
             delta = v - min;
 
-            s = delta / v * 255;	// s
-            h = s*v;
+            s = delta / v * 255;	// s variates between 0 - 255
+            h = s*v;                // h variates between 0 - 65355 wich is 256^2-1
         }
 
         private static void HsvToRgb(double h, double S, double V, out int r, out int g, out int b)
