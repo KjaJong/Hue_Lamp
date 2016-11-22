@@ -6,6 +6,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    
+    <Page.Resources>
+        <Style TargetType="Button" x:Name="MyButtonStyle">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontFamily" Value="segoe mdl2 assets"/>
+        </Style>
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -16,28 +23,37 @@
 
         <RelativePanel Grid.Row="0">
             <Button Name="BackButton" 
-                    FontSize="24" 
-                    FontFamily="segoe mdl2 assets"
+                    Style="{StaticResource MyButtonStyle}"
                     Content="&#59440;"
                     Click="BackButton_OnClick"/>
             <TextBlock FontSize="18"
                        RelativePanel.RightOf="BackButton"
-                       Text="Choice a light"
+                       FontWeight="Bold"
+                       Text="Choose a light"
                        RelativePanel.AlignBottomWithPanel="True"
                        Margin="10,0,0,0"/>
         </RelativePanel>
         
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ListBox Name="MyListBox">
-                
-            </ListBox>
-        </StackPanel>
+        <GridView Grid.Row="1" 
+                  HorizontalAlignment="Center" 
+                  Margin="20,0,0,0"
+                  ItemsSource="{x:Bind }">
+            
+        </GridView>
         
         <RelativePanel Grid.Row="2">
             <Button Name="AddidButton"
-                    FontSize="24"
-                    FontFamily="segoe mdl2 assets"
-                    Content="&#59151;"/>
+                    Style="{StaticResource MyButtonStyle}"
+                    RelativePanel.AlignRightWithPanel="True"
+                    Content="&#59151;"
+                    Click="AddidButton_OnClick"/>
+            
+            <Button Name="AddButton"
+                    Content="&#59152;"
+                    RelativePanel.LeftOf="AddidButton"
+                    Style="{StaticResource MyButtonStyle}"
+                    Click="AddButton_OnClick"/>
+            
         </RelativePanel>
     </Grid>
 </Page>

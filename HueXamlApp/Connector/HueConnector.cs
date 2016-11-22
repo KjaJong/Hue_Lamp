@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Q42.HueApi.Models;
 
@@ -39,6 +41,38 @@ namespace HueXamlApp.Connector
             catch (Exception e)
             {
             }
+        }
+
+        public async Task<List<Light>> GetLights()
+        {
+            int index = 1;
+            bool isNextLight = false;
+            List<Light> lights = new List<Light>();
+            while (!isNextLight)
+            {
+                var response = await _client.GetAsync($"{Adres}/lights/{index}");
+                var responseMessage = await response.Content.ReadAsStringAsync();
+                dynamic message = JsonConvert.DeserializeObject(responseMessage);
+               
+
+                try
+                {
+                    lights.Add(new Light
+                    {
+                        H = (double) message.state.hue,
+                        Id = (string) message.modelid,
+                        IsOn = (bool) message.on,
+                        S = (double) message.sat,
+                        V = (double) message.bri
+                    });
+                    index++;
+                }
+                catch (Exception e)
+                {
+                    isNextLight = true;
+                }
+            }
+            return lights;
         }
 
         public async void ChangeLight(int index, dynamic message)
