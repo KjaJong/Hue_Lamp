@@ -1,0 +1,63 @@
+﻿<Page
+    x:Class="HueXamlApp.Pages.Connection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HueXamlApp.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Name="MyTextblockStyle">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Segoe UI"></Setter>
+        </Style>
+    </Page.Resources>
+    
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <RelativePanel Grid.Row="1" HorizontalAlignment="center">
+                <TextBlock Name="NameBlock"
+                               Text="Your username: "
+                               Style="{StaticResource MyTextblockStyle}"
+                               Margin="0,20,0,0"/>
+                <TextBox Name="UsernameTextBox"
+                             Margin="10,20,0,0"
+                             RelativePanel.RightOf="NameBlock"
+                             MinWidth="167"/>
+                <TextBlock Name="IpBlock"
+                               Text="The IP: "
+                               RelativePanel.Below="UsernameTextBox"
+                               Style="{StaticResource MyTextblockStyle}"
+                               Margin="0,20,0,0"/>
+                <TextBox Name="IpTextBox" 
+                             Text="http://localhost:80/api/" 
+                             Margin="10,20,0,0"
+                             RelativePanel.RightOf="NameBlock"
+                             RelativePanel.Below="UsernameTextBox"/>
+            </RelativePanel>
+        <Button Name="ConnectionButton"
+                            Grid.Row="2"
+                            FontFamily="Segoe UI"
+                            FontSize="18"
+                            Content="Connect"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Margin="0,20,0,0"
+                            Click="ConnectionButton_OnClick"/>
+        <Button Name="Party"
+                            Grid.Row="2"
+                            FontFamily="Segoe UI"
+                            FontSize="18"
+                            Content="party"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0,20,0,0"
+                            Click="Party_OnClick"/>
+    </Grid>
+</Page>
