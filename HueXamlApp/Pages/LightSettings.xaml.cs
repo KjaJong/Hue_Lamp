@@ -26,6 +26,16 @@ namespace HueXamlApp.Pages
         {
             this.InitializeComponent();
         }
-        
+
+        private void GeneralSlider_OnDragLeave(object sender, DragEventArgs e)
+        {
+            //Todo update waarden op basis van switch
+            throw new NotImplementedException();
+        }
+
+        private void ConfirmButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            //TODO updaten van lamp met slider waarden
+        }
     }
 }
