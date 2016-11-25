@@ -42,7 +42,9 @@
                  Margin="0,20,0,0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Path=Id}"/>
+                    <TextBlock Text="{Binding Path=Id}" 
+                               Foreground="{Binding Path=MyBrush}"
+                               HorizontalAlignment="Center"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

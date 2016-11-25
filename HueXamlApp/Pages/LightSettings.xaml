@@ -48,11 +48,13 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <TextBlock Name="HueBlock" Text="Hue:" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextLayout}"/>
             <TextBlock  Name="SaturationBlock" Text="Saturation:" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextLayout}"/>
             <TextBlock Name="BrightnessBlock" Text="Brightness:" Grid.Row="2" Grid.Column="0" Style="{StaticResource TextLayout}"/>
+            <TextBlock Name="OnBlock" Text="On:" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextLayout}"/>
 
             <Slider Name="HueSlider" Maximum="65535" Minimum="0" Grid.Row="0" Grid.Column="1"
                     Tag="Hue" DragLeave="GeneralSlider_OnDragLeave" Style="{StaticResource SliderLayout}"/>
@@ -60,6 +62,7 @@
                     Tag="Saturation" DragLeave="GeneralSlider_OnDragLeave" Style="{StaticResource SliderLayout}"/>
             <Slider Name="BrightnessSlider" Maximum="255" Minimum="0" Grid.Row="2" Grid.Column="1"
                     Tag="Brightness" DragLeave="GeneralSlider_OnDragLeave" Style="{StaticResource SliderLayout}"/>
+            <ToggleSwitch Grid.Row="3" Grid.Column="1" Margin="20,0,0,0"></ToggleSwitch>
         </Grid>
 
         <Grid Grid.Row="2">

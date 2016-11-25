@@ -63,14 +63,13 @@ namespace HueXamlApp.Connector
                     Debug.WriteLine(responseMessage);
                     dynamic message = JsonConvert.DeserializeObject(responseMessage);
 
-                    Lights.Add(new Light
-                    {
-                        Id = (string) message.name,
-                        IsOn = (bool) message.state.on,
-                        H = (int) message.state.hue,
-                        S = (int) message.state.sat,
-                        V = (int) message.state.bri
-                    });
+                    Lights.Add(new Light(
+                        (int) message.state.hue,
+                        (int) message.state.sat,
+                        (int) message.state.bri,
+                        (bool) message.state.on,
+                        (string) message.name
+                    ));
                     index++;
                 }
                 catch (Exception e)
