@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -11,20 +12,22 @@ namespace HueXamlApp.Connector
     public class HueConnector
     {
         public string Adres { get; set; }
-        public readonly string Username;
+        public bool IsConnected { get; set; }
+        public string Username { get; set; }
+        public static ObservableCollection<Light> Lights { get; set; }
         private readonly HttpClient _client;
-        public Lights Lights { get; set; }
+
+        
         public HueConnector(string adres, string username)
         {
             Username = username;
             Adres = adres;
 
             _client = new HttpClient();
-            Login();
-
+            Lights = new ObservableCollection<Light>();
         }
 
-        public async void Login()
+        public async Task Login()
         {
             try
             {
@@ -36,46 +39,47 @@ namespace HueXamlApp.Connector
                 var response = await _client.PostAsync(Adres, content);
 
                 var responseMessage = await response.Content.ReadAsStringAsync();
-                var strings = responseMessage.Split('"');
-                Adres += strings[5];
+                dynamic message = JsonConvert.DeserializeObject(responseMessage);
+                //var strings = responseMessage.Split('"');
+                Username = (string)message[0].success.username;
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e.StackTrace);
-            }
-            GetLights();
+            }   
+            await GetLights();
         }
 
-        public async void GetLights()
+        public async Task GetLights()
         {
-            List<Light> lights = new List<Light>();
             int index = 1;
-            bool isNextLight = false;
-            while (!isNextLight)
+
+            while (true)
             {
                 try
                 {
-                    var response = await _client.GetAsync($"{Adres}/lights/{index}");
+                    var response = await _client.GetAsync($"{Adres}{Username}/lights/{index}");
                     var responseMessage = await response.Content.ReadAsStringAsync();
                     Debug.WriteLine(responseMessage);
                     dynamic message = JsonConvert.DeserializeObject(responseMessage);
-                    
-                    lights.Add(new Light
+
+                    Lights.Add(new Light
                     {
                         Id = (string) message.name,
                         IsOn = (bool) message.state.on,
-                        H = (double) message.state.hue,
-                        S = (double) message.state.sat,
-                        V = (double) message.state.bri
+                        H = (int) message.state.hue,
+                        S = (int) message.state.sat,
+                        V = (int) message.state.bri
                     });
                     index++;
                 }
                 catch (Exception e)
                 {
-                    isNextLight = true;
+                    Debug.WriteLine(e.StackTrace);
+                    return;
                 }
-                Lights = new Lights(lights);
             }
+            
         }
 
         public async void ChangeLight(int index, dynamic message)

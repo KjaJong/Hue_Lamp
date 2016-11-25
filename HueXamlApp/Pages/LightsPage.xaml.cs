@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -26,9 +27,10 @@ namespace HueXamlApp.Pages
     {
         private ObservableCollection<Light> _lights;
         public LightsPage()
-        {
+        {   
             this.InitializeComponent();
-            //_lights = new ObservableCollection<Light>();
+            _lights = HueConnector.Lights;
+            MyListBox.ItemsSource = _lights;
         }
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
