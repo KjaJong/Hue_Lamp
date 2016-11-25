@@ -22,6 +22,10 @@ namespace HueXamlApp.Pages
     /// </summary>
     public sealed partial class LightSettings : Page
     {
+        private double lastKnowHue = 0;
+        private double lastKnowSaturation = 0;
+        private double lastKnowBrightness = 0;
+
         public LightSettings()
         {
             this.InitializeComponent();
@@ -30,7 +34,26 @@ namespace HueXamlApp.Pages
         private void GeneralSlider_OnDragLeave(object sender, DragEventArgs e)
         {
             //Todo update waarden op basis van switch
-            throw new NotImplementedException();
+            string tag = ((Slider) sender).Tag.ToString();
+
+            switch (tag)
+            {
+                case "Hue":
+                {
+                    lastKnowHue = ((Slider) sender).Value;
+                    break;
+                }
+                case "Saturation":
+                {
+                    lastKnowSaturation = ((Slider)sender).Value;
+                    break;
+                }
+                case "Brightness":
+                {
+                    lastKnowBrightness = ((Slider)sender).Value;
+                    break;
+                    }
+            }
         }
 
         private void ConfirmButton_OnClick(object sender, RoutedEventArgs e)
