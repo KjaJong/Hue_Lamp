@@ -98,7 +98,6 @@
     <Compile Include="Connector\ColorUtil.cs" />
     <Compile Include="Connector\HueConnector.cs" />
     <Compile Include="Connector\Light.cs" />
-    <Compile Include="Connector\Lights.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

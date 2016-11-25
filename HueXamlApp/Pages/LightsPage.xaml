@@ -5,6 +5,7 @@
     xmlns:local="using:HueXamlApp.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:HueXamlApp.Connector"
     mc:Ignorable="d">
     
     <Page.Resources>
@@ -39,6 +40,11 @@
                  HorizontalAlignment="Center"
                  SelectionMode="Single"
                  Margin="0,20,0,0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Id}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
         
         <RelativePanel Grid.Row="2">

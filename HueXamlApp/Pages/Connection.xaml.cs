@@ -32,11 +32,11 @@ namespace HueXamlApp.Pages
             this.InitializeComponent();
         }
 
-        private void ConnectionButton_OnClick(object sender, RoutedEventArgs e)
+        private async void ConnectionButton_OnClick(object sender, RoutedEventArgs e)
         {
-
             if (UsernameTextBox.Text == "") return;
             Connector = new HueConnector(IpTextBox.Text, UsernameTextBox.Text);
+            await Connector.Login();
             Frame.Navigate(typeof(LightsPage));
         }
     }
