@@ -33,13 +33,13 @@
                        RelativePanel.AlignBottomWithPanel="True"
                        Margin="10,0,0,0"/>
         </RelativePanel>
-        
-        <GridView Grid.Row="1" 
-                  HorizontalAlignment="Center" 
-                  Margin="20,0,0,0"
-                  ItemsSource="{x:Bind }">
-            
-        </GridView>
+
+        <ListBox Name="MyListBox" 
+                 Grid.Row="1"
+                 HorizontalAlignment="Center"
+                 SelectionMode="Single"
+                 Margin="0,20,0,0">
+        </ListBox>
         
         <RelativePanel Grid.Row="2">
             <Button Name="AddidButton"
