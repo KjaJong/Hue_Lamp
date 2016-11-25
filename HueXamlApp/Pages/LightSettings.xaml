@@ -31,13 +31,13 @@
             <TextBlock Name="BrightnessBlock" Text="Brightness:" Margin="20" FontSize="24" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
 
             <Slider Name="HueSlider" Margin="20" Maximum="65535" Minimum="0" Background="Crimson" Grid.Row="0" Grid.Column="1"
-                    VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center" HorizontalAlignment="Stretch" Tag="Hue"
                     CanDrag ="True" DragLeave="GeneralSlider_OnDragLeave"/>
             <Slider Name="SaturationSlider" Margin="20" Maximum="255" Minimum="0" Background="Crimson" Grid.Row="1" Grid.Column="1" 
-                    VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center" HorizontalAlignment="Stretch" Tag="Saturation"
                     CanDrag="True" DragLeave="GeneralSlider_OnDragLeave"/>
             <Slider Name="BrightnessSlider" Margin="20" Maximum="255" Minimum="0" Background="Crimson" Grid.Row="2" Grid.Column="1"
-                    VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center" HorizontalAlignment="Stretch" Tag="Brightness"
                     CanDrag="True" DragLeave="GeneralSlider_OnDragLeave"/>
         </Grid>
 
