@@ -50,14 +50,5 @@
                             VerticalAlignment="Top"
                             Margin="0,20,0,0"
                             Click="ConnectionButton_OnClick"/>
-        <Button Name="Party"
-                            Grid.Row="2"
-                            FontFamily="Segoe UI"
-                            FontSize="18"
-                            Content="party"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Margin="0,20,0,0"
-                            Click="Party_OnClick"/>
     </Grid>
 </Page>

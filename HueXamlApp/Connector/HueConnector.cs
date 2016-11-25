@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -12,6 +13,7 @@ namespace HueXamlApp.Connector
         public string Adres { get; set; }
         public readonly string Username;
         private readonly HttpClient _client;
+        public Lights Lights { get; set; }
         public HueConnector(string adres, string username)
         {
             Username = username;
@@ -19,6 +21,7 @@ namespace HueXamlApp.Connector
 
             _client = new HttpClient();
             Login();
+
         }
 
         public async void Login()
@@ -33,37 +36,37 @@ namespace HueXamlApp.Connector
                 var response = await _client.PostAsync(Adres, content);
 
                 var responseMessage = await response.Content.ReadAsStringAsync();
-                var strings = responseMessage.Split('[',']');
-                dynamic message = JsonConvert.DeserializeObject(strings[1]);
-
-                Adres += (string)message.success.username;
+                var strings = responseMessage.Split('"');
+                Adres += strings[5];
             }
             catch (Exception e)
             {
+                Debug.WriteLine(e.StackTrace);
             }
+            GetLights();
         }
 
-        public async Task<List<Light>> GetLights()
+        public async void GetLights()
         {
+            List<Light> lights = new List<Light>();
             int index = 1;
             bool isNextLight = false;
-            List<Light> lights = new List<Light>();
             while (!isNextLight)
             {
-                var response = await _client.GetAsync($"{Adres}/lights/{index}");
-                var responseMessage = await response.Content.ReadAsStringAsync();
-                dynamic message = JsonConvert.DeserializeObject(responseMessage);
-               
-
                 try
                 {
+                    var response = await _client.GetAsync($"{Adres}/lights/{index}");
+                    var responseMessage = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine(responseMessage);
+                    dynamic message = JsonConvert.DeserializeObject(responseMessage);
+                    
                     lights.Add(new Light
                     {
+                        Id = (string) message.name,
+                        IsOn = (bool) message.state.on,
                         H = (double) message.state.hue,
-                        Id = (string) message.modelid,
-                        IsOn = (bool) message.on,
-                        S = (double) message.sat,
-                        V = (double) message.bri
+                        S = (double) message.state.sat,
+                        V = (double) message.state.bri
                     });
                     index++;
                 }
@@ -71,8 +74,8 @@ namespace HueXamlApp.Connector
                 {
                     isNextLight = true;
                 }
+                Lights = new Lights(lights);
             }
-            return lights;
         }
 
         public async void ChangeLight(int index, dynamic message)

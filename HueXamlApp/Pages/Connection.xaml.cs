@@ -39,29 +39,5 @@ namespace HueXamlApp.Pages
             Connector = new HueConnector(IpTextBox.Text, UsernameTextBox.Text);
             Frame.Navigate(typeof(LightsPage));
         }
-
-        private void Party_OnClick(object sender, RoutedEventArgs e)
-        {
-            Random random = new Random();
-
-            for (int i = 1; i <= 3; i++)
-            {
-                double r = random.Next(256);
-                double g = random.Next(256);
-                double b = random.Next(256);
-
-                double h;
-                double s;
-                double v;
-                
-                ColorUtil.RGBtoHSV(r, g, b, out h, out s, out v);
-                Connector.ChangeLight(i, new
-                {
-                    sat = 255,
-                    bri = 255,
-                    hue = h
-                });
-            }
-        }
     }
 }

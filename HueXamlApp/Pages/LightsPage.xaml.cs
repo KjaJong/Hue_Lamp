@@ -28,7 +28,7 @@ namespace HueXamlApp.Pages
         public LightsPage()
         {
             this.InitializeComponent();
-            _lights = new ObservableCollection<Light>();
+            //_lights = new ObservableCollection<Light>();
         }
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
