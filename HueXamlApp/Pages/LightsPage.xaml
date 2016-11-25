@@ -23,12 +23,12 @@
         </Grid.RowDefinitions>
 
         <RelativePanel Grid.Row="0">
-            <Button Name="BackButton" 
+            <Button Name="BackButtonOld" 
                     Style="{StaticResource MyButtonStyle}"
                     Content="&#59440;"
-                    Click="BackButton_OnClick"/>
+                    Click="Button_OnClick"/>
             <TextBlock FontSize="18"
-                       RelativePanel.RightOf="BackButton"
+                       RelativePanel.RightOf="BackButtonOld"
                        FontWeight="Bold"
                        Text="Choose a light"
                        RelativePanel.AlignBottomWithPanel="True"
@@ -39,27 +39,50 @@
                  Grid.Row="1"
                  HorizontalAlignment="Center"
                  SelectionMode="Single"
-                 Margin="0,20,0,0">
+                 Margin="0,20,0,0"
+                 SelectionChanged="MyListBox_OnSelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=Id}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
+        <CommandBar Grid.Row="2" Background="Black">
+            <CommandBar.Content>
+                <StackPanel>
+                    <TextBlock Name="UserBlock"/>
+                    <TextBlock Name="LampBlock"/>
+                </StackPanel>
+            </CommandBar.Content>
+
+            <AppBarButton Name ="BackButton" Icon="Back" Label ="Back" Tag="Back"
+                          Click="Button_OnClick"/>
+            <AppBarSeparator/>
+            <AppBarButton Name="SettingsButton" Icon="Setting" Label="Settings" Tag="Setting"
+                          Click="Button_OnClick"/>
+            <AppBarSeparator/>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Name="PartyButton" Icon="Favorite" Label="Party" Tag="Party"
+                              Click="Button_OnClick"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
         
+        <!--
         <RelativePanel Grid.Row="2">
             <Button Name="AddidButton"
                     Style="{StaticResource MyButtonStyle}"
                     RelativePanel.AlignRightWithPanel="True"
                     Content="&#59151;"
                     Click="AddidButton_OnClick"/>
-            
+
             <Button Name="AddButton"
                     Content="&#59152;"
                     RelativePanel.LeftOf="AddidButton"
                     Style="{StaticResource MyButtonStyle}"
                     Click="AddButton_OnClick"/>
-            
+
         </RelativePanel>
+        -->
     </Grid>
 </Page>

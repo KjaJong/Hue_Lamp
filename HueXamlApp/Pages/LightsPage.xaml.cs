@@ -26,19 +26,23 @@ namespace HueXamlApp.Pages
     public sealed partial class LightsPage : Page
     {
         private ObservableCollection<Light> _lights;
+
         public LightsPage()
-        {   
+        {
             this.InitializeComponent();
             _lights = HueConnector.Lights;
             MyListBox.ItemsSource = _lights;
+            UserBlock.Text = Connection.Connector.Username;
+            LampBlock.Text = String.Empty;
         }
 
-        private void BackButton_OnClick(object sender, RoutedEventArgs e)
+        private void Button_OnClick(object sender, RoutedEventArgs e)
         {
-            if (Frame.CanGoBack)
-            {
-                Frame.GoBack();
-            }
+            //TODO add switch with all buttons
+            //if (Frame.CanGoBack)
+            //{
+            //    Frame.GoBack();
+            //}
         }
 
         private void AddidButton_OnClick(object sender, RoutedEventArgs e)
@@ -49,6 +53,13 @@ namespace HueXamlApp.Pages
         private void AddButton_OnClick(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
+        }
+
+        private void MyListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            List<object> selection = new List<object>(((ListBox) sender).SelectedItems);
+            Light temp = (Light)selection.ElementAt(0);
+            LampBlock.Text = temp.Id;
         }
     }
 }
