@@ -52,7 +52,7 @@ namespace HueXamlApp.Pages
             }
         }
 
-        private void BackButton_OnClick(object sender, RoutedEventArgs e)
+        private void Button_OnClick(object sender, RoutedEventArgs e)
         {
             if (Frame.CanGoBack)
             {

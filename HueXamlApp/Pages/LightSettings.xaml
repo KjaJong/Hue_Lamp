@@ -71,7 +71,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             
-            <Button Name="BackButton" Click="BackButton_OnClick" Grid.Column="0" Style="{StaticResource ButtonLayout}" 
+            <Button Name="BackButton" Click="Button_OnClick" Grid.Column="0" Style="{StaticResource ButtonLayout}" 
                     Content="&#59440;" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
         </Grid>
     </Grid>
