@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Devices.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -27,44 +28,51 @@ namespace HueXamlApp.Pages
     /// </summary>
     public sealed partial class LightSettings
     {
-        private int _index;
-        public int _lastKnowHue = 0;
-        public int _lastKnowSaturation = 0;
-        public int _lastKnowBrightness = 0;
+        private readonly List<int> _indexes;
 
         public LightSettings()
         {
             this.InitializeComponent();
+            _indexes = new List<int>();
         }
 
-        private void GeneralSlider_OnDragLeave(object sender, DragEventArgs dragEventArgs)
+        private void GeneralSlider_OnDragLeave(object sender, RangeBaseValueChangedEventArgs rangeBaseValueChangedEventArgs)
         {
-            //TODO: Make this a feminazi that triggers
-            string tag = ((Slider) sender).Tag.ToString();
-            Debug.WriteLine("yolo");
-
-            switch (tag.ToLower())
+            //TODO: Make this a feminazi that triggers and doesn't update every fucking time
+            switch (((Slider) sender).Tag.ToString().ToLower())
             {
                 case "hue":
-                    _lastKnowHue = (int) ((Slider) sender).Value;
+                    foreach (var i in _indexes)
+                    {
+                        Connection.Connector.ChangeLight(i, new
+                        {
+                            hue = (int) ((Slider) sender).Value
+                        });
+                    }
                     break;
 
                 case "saturation":
-                    _lastKnowSaturation = (int) ((Slider) sender).Value;
+                    foreach (var i in _indexes)
+                    {
+                        Connection.Connector.ChangeLight(i, new
+                        {
+                            hue = (int) ((Slider) sender).Value
+                        });
+                    }
                     break;
 
                 case "brightness":
-                    _lastKnowBrightness = (int) ((Slider) sender).Value;
+                    foreach (var i in _indexes)
+                    {
+                        Connection.Connector.ChangeLight(i, new
+                        {
+                            hue = (int) ((Slider) sender).Value
+                        });
+                    }
                     break;
             }
-
-            Connection.Connector.ChangeLight(_index, new
-            {
-                hue = _lastKnowHue,
-                sat = _lastKnowSaturation,
-                bri = _lastKnowBrightness
-            });
         }
+
 
         private void Button_OnClick(object sender, RoutedEventArgs e)
         {
@@ -76,30 +84,39 @@ namespace HueXamlApp.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            _indexes.Clear();
             var text = e.Parameter as string;
 
             if (text == null) return;
-            if (!int.TryParse(text, out _index)) return;
 
-            var lighty = HueConnector.Lights.ElementAt(_index);
-            _index++;
+            var strings = text.ToCharArray();
+            foreach (var s in strings)
+            {
+                int index;
+                if (!int.TryParse(s.ToString(), out index)) return;
+                index++;
+                _indexes.Add(index);
+            }
 
-            _lastKnowBrightness = lighty.V;
-            _lastKnowHue = lighty.H;
-            _lastKnowSaturation = lighty.S;
+            if (_indexes.Count != 1) return;
 
-            SaturationSlider.Value = _lastKnowSaturation;
-            HueSlider.Value = _lastKnowHue;
-            BrightnessSlider.Value = _lastKnowBrightness;
+            var lighty = HueConnector.Lights.ElementAt(0);
+
+            SaturationSlider.Value = lighty.S;
+            HueSlider.Value = lighty.H;
+            BrightnessSlider.Value = lighty.V;
             Toggle.IsOn = lighty.IsOn;
         }
 
         private void Toggle_OnToggled(object sender, RoutedEventArgs e)
         {
-            Connection.Connector.ChangeLight(_index, new
+            foreach (var i in _indexes)
             {
-                on = Toggle.IsOn
-            });
+                Connection.Connector.ChangeLight(i, new
+                {
+                    on = Toggle.IsOn
+                });
+            }
         }
     }
 }

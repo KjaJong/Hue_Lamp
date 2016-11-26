@@ -25,8 +25,8 @@ namespace HueXamlApp.Pages
     /// </summary>
     public sealed partial class LightsPage : Page
     {
-        private ObservableCollection<Light> _lights;
-        private bool IsListBoxSelected;
+        private readonly ObservableCollection<Light> _lights;
+        private bool _isListBoxSelected;
 
         public LightsPage()
         {
@@ -43,11 +43,15 @@ namespace HueXamlApp.Pages
             switch (thingy.Tag.ToString().ToLower())
             {
                 case "settings":
-                    if (!IsListBoxSelected) return;
+                    if (!_isListBoxSelected) return;
 
-                    var lighty = (Light) MyListBox.SelectedItem;
-                    var index = HueConnector.Lights.IndexOf(lighty).ToString();
+                    var lighties = MyListBox.SelectedItems;
+                    string index = "";
 
+                    foreach (var lighty in lighties)
+                    {
+                      index += HueConnector.Lights.IndexOf((Light)lighty).ToString();
+                    }
                     Frame.Navigate(typeof(LightSettings), index);
                     
                     break;
@@ -65,7 +69,7 @@ namespace HueXamlApp.Pages
 
         private void MyListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            IsListBoxSelected = true;
+            _isListBoxSelected = true;
         }
     }
 }

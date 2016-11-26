@@ -37,10 +37,9 @@ namespace HueXamlApp.Connector
                 }));
 
                 var response = await _client.PostAsync(Adres, content);
-
                 var responseMessage = await response.Content.ReadAsStringAsync();
+
                 dynamic message = JsonConvert.DeserializeObject(responseMessage);
-                //var strings = responseMessage.Split('"');
                 Username = (string)message[0].success.username;
             }
             catch (Exception e)
@@ -60,7 +59,6 @@ namespace HueXamlApp.Connector
                 {
                     var response = await _client.GetAsync($"{Adres}{Username}/lights/{index}");
                     var responseMessage = await response.Content.ReadAsStringAsync();
-                    Debug.WriteLine(responseMessage);
                     dynamic message = JsonConvert.DeserializeObject(responseMessage);
 
                     Lights.Add(new Light(

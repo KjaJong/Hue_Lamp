@@ -38,7 +38,7 @@
         <ListBox Name="MyListBox" 
                  Grid.Row="1"
                  HorizontalAlignment="Center"
-                 SelectionMode="Single"
+                 SelectionMode="Multiple"
                  Margin="0,20,0,0"
                  SelectionChanged="MyListBox_OnSelectionChanged">
             <ListBox.ItemTemplate>

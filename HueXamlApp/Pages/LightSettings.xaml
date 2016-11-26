@@ -57,11 +57,11 @@
             <TextBlock Name="OnBlock" Text="On:" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextLayout}"/>
 
             <Slider Name="HueSlider" Maximum="65535" Minimum="0" Grid.Row="0" Grid.Column="1"
-                    Tag="Hue" DragLeave="GeneralSlider_OnDragLeave" Style="{StaticResource SliderLayout}"/>
+                    Tag="Hue" ValueChanged="GeneralSlider_OnDragLeave" Style="{StaticResource SliderLayout}"/>
             <Slider Name="SaturationSlider" Maximum="255" Minimum="0" Grid.Row="1" Grid.Column="1" 
-                    Tag="Saturation" DragLeave="GeneralSlider_OnDragLeave" Style="{StaticResource SliderLayout}"/>
+                    Tag="Saturation" ValueChanged="GeneralSlider_OnDragLeave" Style="{StaticResource SliderLayout}"/>
             <Slider Name="BrightnessSlider" Maximum="255" Minimum="0" Grid.Row="2" Grid.Column="1"
-                    Tag="Brightness" DragLeave="GeneralSlider_OnDragLeave" Style="{StaticResource SliderLayout}"/>
+                    Tag="Brightness" ValueChanged="GeneralSlider_OnDragLeave" Style="{StaticResource SliderLayout}"/>
             <ToggleSwitch Toggled="Toggle_OnToggled" Name="Toggle" Grid.Row="3" Grid.Column="1" Margin="20,0,0,0"/>
         </Grid>
 
