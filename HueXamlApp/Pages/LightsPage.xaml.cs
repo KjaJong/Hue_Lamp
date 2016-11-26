@@ -33,11 +33,10 @@ namespace HueXamlApp.Pages
             this.InitializeComponent();
             _lights = HueConnector.Lights;
             MyListBox.ItemsSource = _lights;
-            //UserBlock.Text = Connection.Connector.Username;
-            //LampBlock.Text = String.Empty;
+            UserBlock.Text = Connection.Connector.FakeUsername;
         }
 
-        private void Button_OnClick(object sender, RoutedEventArgs e)
+        private async void Button_OnClick(object sender, RoutedEventArgs e)
         {
             var thingy = (Button) sender;
             switch (thingy.Tag.ToString().ToLower())
@@ -60,6 +59,9 @@ namespace HueXamlApp.Pages
                     {
                         Frame.GoBack();
                     }
+                    break;
+                case "refresh":
+                    await Connection.Connector.GetLights();
                     break;
                 default:
                     Debug.WriteLine("You're not suposse to be here.");

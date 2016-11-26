@@ -29,47 +29,47 @@ namespace HueXamlApp.Pages
     public sealed partial class LightSettings
     {
         private readonly List<int> _indexes;
+        private int _lastSaturation;
+        private int _lastHue;
+        private int _lastBrightNess;
 
         public LightSettings()
         {
             this.InitializeComponent();
             _indexes = new List<int>();
+            _lastBrightNess = 0;
+            _lastHue = 0;
+            _lastSaturation = 0;
         }
 
         private void GeneralSlider_OnDragLeave(object sender, RangeBaseValueChangedEventArgs rangeBaseValueChangedEventArgs)
         {
             //TODO: Make this a feminazi that triggers and doesn't update every fucking time
+            Debug.WriteLine("Error");
+
             switch (((Slider) sender).Tag.ToString().ToLower())
             {
                 case "hue":
-                    foreach (var i in _indexes)
-                    {
-                        Connection.Connector.ChangeLight(i, new
-                        {
-                            hue = (int) ((Slider) sender).Value
-                        });
-                    }
+                    _lastHue = (int)((Slider)sender).Value;
                     break;
 
                 case "saturation":
-                    foreach (var i in _indexes)
-                    {
-                        Connection.Connector.ChangeLight(i, new
-                        {
-                            hue = (int) ((Slider) sender).Value
-                        });
-                    }
+                    _lastSaturation = (int)((Slider)sender).Value;
                     break;
 
                 case "brightness":
-                    foreach (var i in _indexes)
-                    {
-                        Connection.Connector.ChangeLight(i, new
-                        {
-                            hue = (int) ((Slider) sender).Value
-                        });
-                    }
+                    _lastBrightNess = (int)((Slider) sender).Value;
                     break;
+            }
+
+            foreach (var i in _indexes)
+            {
+                Connection.Connector.ChangeLight(i, new
+                {
+                    hue = _lastHue,
+                    sat = _lastSaturation,
+                    bri = _lastBrightNess
+                });
             }
         }
 
@@ -102,9 +102,13 @@ namespace HueXamlApp.Pages
 
             var lighty = HueConnector.Lights.ElementAt(0);
 
-            SaturationSlider.Value = lighty.S;
-            HueSlider.Value = lighty.H;
-            BrightnessSlider.Value = lighty.V;
+            _lastHue = lighty.H;
+            _lastSaturation = lighty.S;
+            _lastBrightNess = lighty.V;
+
+            SaturationSlider.Value = _lastSaturation;
+            HueSlider.Value = _lastHue;
+            BrightnessSlider.Value = _lastBrightNess;
             Toggle.IsOn = lighty.IsOn;
         }
 

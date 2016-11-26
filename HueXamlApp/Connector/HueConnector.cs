@@ -14,13 +14,14 @@ namespace HueXamlApp.Connector
         public string Adres { get; set; }
         public bool IsConnected { get; set; }
         public string Username { get; set; }
+        public string FakeUsername { get; set; }
         public static ObservableCollection<Light> Lights { get; set; }
         private readonly HttpClient _client;
 
         
         public HueConnector(string adres, string username)
         {
-            Username = username;
+            FakeUsername = username;
             Adres = adres;
 
             _client = new HttpClient();
@@ -33,7 +34,7 @@ namespace HueXamlApp.Connector
             {
                 HttpContent content = new JsonContent(JsonConvert.SerializeObject(new
                 {
-                    devicetype = $"MennoGijsApp#{Username}"
+                    devicetype = $"MennoGijsApp#{FakeUsername}"
                 }));
 
                 var response = await _client.PostAsync(Adres, content);
@@ -52,6 +53,7 @@ namespace HueXamlApp.Connector
         public async Task GetLights()
         {
             int index = 1;
+            Lights.Clear();
 
             while (true)
             {
@@ -76,7 +78,6 @@ namespace HueXamlApp.Connector
                     return;
                 }
             }
-            
         }
 
         public async void ChangeLight(int index, dynamic message)

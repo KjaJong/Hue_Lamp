@@ -23,12 +23,7 @@
         </Grid.RowDefinitions>
 
         <RelativePanel Grid.Row="0">
-            <Button Name="BackButtonOld" 
-                    Style="{StaticResource MyButtonStyle}"
-                    Content="&#59440;"
-                    Click="Button_OnClick"/>
             <TextBlock FontSize="18"
-                       RelativePanel.RightOf="BackButtonOld"
                        FontWeight="Bold"
                        Text="Choose a light"
                        RelativePanel.AlignBottomWithPanel="True"
@@ -54,7 +49,6 @@
             <CommandBar.Content>
                 <StackPanel>
                     <TextBlock Name="UserBlock"/>
-                    <TextBlock Name="LampBlock"/>
                 </StackPanel>
             </CommandBar.Content>
 
@@ -69,6 +63,12 @@
                           Icon="Setting"
                           Label="Settings"
                           Tag="Settings"
+                          Click="Button_OnClick"/>
+            <AppBarSeparator/>
+            <AppBarButton Name="RefreshButton"
+                          Icon="Refresh"
+                          Label="Refresh"
+                          Tag="Refresh"
                           Click="Button_OnClick"/>
             <AppBarSeparator/>
             
