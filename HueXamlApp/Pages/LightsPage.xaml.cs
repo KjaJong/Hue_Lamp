@@ -26,40 +26,46 @@ namespace HueXamlApp.Pages
     public sealed partial class LightsPage : Page
     {
         private ObservableCollection<Light> _lights;
+        private bool IsListBoxSelected;
 
         public LightsPage()
         {
             this.InitializeComponent();
             _lights = HueConnector.Lights;
             MyListBox.ItemsSource = _lights;
-            UserBlock.Text = Connection.Connector.Username;
-            LampBlock.Text = String.Empty;
+            //UserBlock.Text = Connection.Connector.Username;
+            //LampBlock.Text = String.Empty;
         }
 
         private void Button_OnClick(object sender, RoutedEventArgs e)
         {
-            //TODO add switch with all buttons
-            //if (Frame.CanGoBack)
-            //{
-            //    Frame.GoBack();
-            //}
-        }
+            var thingy = (Button) sender;
+            switch (thingy.Tag.ToString().ToLower())
+            {
+                case "settings":
+                    if (!IsListBoxSelected) return;
 
-        private void AddidButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+                    var lighty = (Light) MyListBox.SelectedItem;
+                    var index = HueConnector.Lights.IndexOf(lighty).ToString();
 
-        private void AddButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
+                    Frame.Navigate(typeof(LightSettings), index);
+                    
+                    break;
+                case "back":
+                    if (Frame.CanGoBack)
+                    {
+                        Frame.GoBack();
+                    }
+                    break;
+                default:
+                    Debug.WriteLine("You're not suposse to be here.");
+                    break;
+            }
         }
 
         private void MyListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<object> selection = new List<object>(((ListBox) sender).SelectedItems);
-            Light temp = (Light)selection.ElementAt(0);
-            LampBlock.Text = temp.Id;
+            IsListBoxSelected = true;
         }
     }
 }

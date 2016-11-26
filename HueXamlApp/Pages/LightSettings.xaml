@@ -62,7 +62,7 @@
                     Tag="Saturation" DragLeave="GeneralSlider_OnDragLeave" Style="{StaticResource SliderLayout}"/>
             <Slider Name="BrightnessSlider" Maximum="255" Minimum="0" Grid.Row="2" Grid.Column="1"
                     Tag="Brightness" DragLeave="GeneralSlider_OnDragLeave" Style="{StaticResource SliderLayout}"/>
-            <ToggleSwitch Grid.Row="3" Grid.Column="1" Margin="20,0,0,0"></ToggleSwitch>
+            <ToggleSwitch Toggled="Toggle_OnToggled" Name="Toggle" Grid.Row="3" Grid.Column="1" Margin="20,0,0,0"/>
         </Grid>
 
         <Grid Grid.Row="2">

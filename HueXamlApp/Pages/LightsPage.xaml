@@ -58,12 +58,20 @@
                 </StackPanel>
             </CommandBar.Content>
 
-            <AppBarButton Name ="BackButton" Icon="Back" Label ="Back" Tag="Back"
+            <AppBarButton Name ="BackButton" 
+                          Icon="Back"
+                          Label ="Back"
+                          Tag="Back"
                           Click="Button_OnClick"/>
             <AppBarSeparator/>
-            <AppBarButton Name="SettingsButton" Icon="Setting" Label="Settings" Tag="Setting"
+            
+            <AppBarButton Name="SettingsButton" 
+                          Icon="Setting"
+                          Label="Settings"
+                          Tag="Settings"
                           Click="Button_OnClick"/>
             <AppBarSeparator/>
+            
             <CommandBar.SecondaryCommands>
                 <AppBarButton Name="PartyButton" Icon="Favorite" Label="Party" Tag="Party"
                               Click="Button_OnClick"/>
