@@ -49,7 +49,7 @@ namespace HueXamlApp.Pages
 
                     foreach (var lighty in lighties)
                     {
-                      index += HueConnector.Lights.IndexOf((Light)lighty).ToString();
+                      index += HueConnector.Lights.IndexOf((Light)lighty) + ",";
                     }
                     Frame.Navigate(typeof(LightSettings), index);
                     

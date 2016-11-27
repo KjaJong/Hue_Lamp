@@ -68,11 +68,11 @@ namespace HueXamlApp.Pages
 
             if (text == null) return;
 
-            var strings = text.ToCharArray();
+            var strings = text.Split(',');
             foreach (var s in strings)
             {
                 int index;
-                if (!int.TryParse(s.ToString(), out index)) return;
+                if (!int.TryParse(s, out index)) return;
                 index++;
                 _indexes.Add(index);
             }
