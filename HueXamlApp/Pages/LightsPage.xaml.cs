@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -25,14 +26,12 @@ namespace HueXamlApp.Pages
     /// </summary>
     public sealed partial class LightsPage : Page
     {
-        private readonly ObservableCollection<Light> _lights;
         private bool _isListBoxSelected;
 
         public LightsPage()
         {
             this.InitializeComponent();
-            _lights = HueConnector.Lights;
-            MyListBox.ItemsSource = _lights;
+            MyListBox.ItemsSource = HueConnector.Lights;
             UserBlock.Text = Connection.Connector.FakeUsername;
         }
 
@@ -52,7 +51,6 @@ namespace HueXamlApp.Pages
                       index += HueConnector.Lights.IndexOf((Light)lighty) + ",";
                     }
                     Frame.Navigate(typeof(LightSettings), index);
-                    
                     break;
 
                 case "back":
@@ -84,14 +82,11 @@ namespace HueXamlApp.Pages
 
         private void Party()
         {
-            Random rnd = new Random();
+            var rnd = new Random();
 
-            for (int i = 1; i <= HueConnector.Lights.Count; i++) /*Now a magic number, dunno if it should be anything else though.*/
+            for (var i = 1; i <= HueConnector.Lights.Count; i++) /*Now a magic number, dunno if it should be anything else though.*/
             {
-                List<int> newValues = new List<int>();
-                newValues.Add(rnd.Next(65535));
-                newValues.Add(rnd.Next(255));
-                newValues.Add(rnd.Next(255));
+                var newValues = new List<int> {rnd.Next(65535), rnd.Next(255), rnd.Next(255)};
 
                 Connection.Connector.ChangeLight(i, new
                 {

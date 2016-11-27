@@ -47,7 +47,6 @@ namespace HueXamlApp.Pages
             t.Tick += (s, e) => //Sets the tick event that goes of after every interval
             {
                 UpdateLamp();
-                Debug.WriteLine("TICK TOCK MOTHAFOCKA");
                 t.Stop();
             };
 
@@ -57,7 +56,6 @@ namespace HueXamlApp.Pages
         private void GeneralSlider_OnValueChanged(object sender, RangeBaseValueChangedEventArgs rangeBaseValueChangedEventArgs)
         {
             //TODO: needs to work without timers and just when you leave the pointer.
-            Debug.WriteLine("Error");
             if (!_changeTimer.IsEnabled) { _changeTimer.Start(); }
             _changeAmount++;
 
@@ -67,12 +65,12 @@ namespace HueXamlApp.Pages
             }
         }
 
-        private void Button_OnClick(object sender, RoutedEventArgs e)
+        private async void Button_OnClick(object sender, RoutedEventArgs e)
         {
-            if (Frame.CanGoBack)
-            {
-                Frame.GoBack();
-            }
+            if (!Frame.CanGoBack) return;
+
+            await Connection.Connector.GetLights();
+            Frame.GoBack();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -113,7 +111,7 @@ namespace HueXamlApp.Pages
         private void UpdateLamp()
         {
             foreach (var i in _indexes)
-            {
+            { 
                 Connection.Connector.ChangeLight(i, new
                 {
                     hue = HueSlider.Value,

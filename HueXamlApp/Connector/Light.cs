@@ -20,7 +20,12 @@ namespace HueXamlApp.Connector
             V = v;
             IsOn = ison;
             Id = id;
+            UpdateBrush();
+           
+        }
 
+        public void UpdateBrush()
+        {
             Color color = ColorUtil.HsvToRgb(H, S, V);
             SolidColorBrush brushColor = new SolidColorBrush(color);
 
