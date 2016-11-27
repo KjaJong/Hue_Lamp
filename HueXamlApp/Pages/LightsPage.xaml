@@ -38,9 +38,11 @@
                  SelectionChanged="MyListBox_OnSelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Path=Id}" 
-                               Foreground="{Binding Path=MyBrush}"
-                               HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="{Binding Path=MyBrush}"/>
+                        <TextBlock Text="{Binding Path=Id}" 
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
