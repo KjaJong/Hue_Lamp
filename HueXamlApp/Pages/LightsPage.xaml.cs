@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -26,13 +25,20 @@ namespace HueXamlApp.Pages
     /// </summary>
     public sealed partial class LightsPage : Page
     {
+        private readonly ObservableCollection<Light> _lights;
         private bool _isListBoxSelected;
+        private readonly DispatcherTimer _partyTimer;
+        private bool _partyAllowed;
 
         public LightsPage()
         {
             this.InitializeComponent();
-            MyListBox.ItemsSource = HueConnector.Lights;
+            _lights = HueConnector.Lights;
+            MyListBox.ItemsSource = _lights;
             UserBlock.Text = Connection.Connector.FakeUsername;
+            _partyTimer = DefineTimer();
+            _partyTimer.Start();
+            _partyAllowed = false;
         }
 
         private async void Button_OnClick(object sender, RoutedEventArgs e)
@@ -51,6 +57,7 @@ namespace HueXamlApp.Pages
                       index += HueConnector.Lights.IndexOf((Light)lighty) + ",";
                     }
                     Frame.Navigate(typeof(LightSettings), index);
+                    
                     break;
 
                 case "back":
@@ -65,8 +72,7 @@ namespace HueXamlApp.Pages
                     break;
 
                 case "party":
-                    //TODO: needs to work with toggle and intervals.
-                    Party();
+                    _partyAllowed = !_partyAllowed;
                     break;
 
                 default:
@@ -82,11 +88,14 @@ namespace HueXamlApp.Pages
 
         private void Party()
         {
-            var rnd = new Random();
+            Random rnd = new Random();
 
-            for (var i = 1; i <= HueConnector.Lights.Count; i++) /*Now a magic number, dunno if it should be anything else though.*/
+            for (int i = 1; i <= HueConnector.Lights.Count; i++) 
             {
-                var newValues = new List<int> {rnd.Next(65535), rnd.Next(255), rnd.Next(255)};
+                List<int> newValues = new List<int>();
+                newValues.Add(rnd.Next(65535));
+                newValues.Add(rnd.Next(255));
+                newValues.Add(rnd.Next(255));
 
                 Connection.Connector.ChangeLight(i, new
                 {
@@ -96,6 +105,18 @@ namespace HueXamlApp.Pages
                 });
 
             }
+        }
+
+        private DispatcherTimer DefineTimer()
+        {
+            DispatcherTimer t = new DispatcherTimer();
+            t.Interval = new TimeSpan(0, 0, 0, 2); //Sets a two second timer
+            t.Tick += (s, e) => //Sets the tick event that goes of after every interval
+            {
+                if(_partyAllowed) { Party();}
+                Debug.WriteLine("TICK TOCK MOTHAFOCKA");
+            };
+            return t;
         }
     }
 }
