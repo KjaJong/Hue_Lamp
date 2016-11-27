@@ -21,6 +21,7 @@ namespace HueXamlApp.Connector
         
         public HueConnector(string adres, string username)
         {
+            //TODO: needs to work for IRL hue's
             FakeUsername = username;
             Adres = adres;
 

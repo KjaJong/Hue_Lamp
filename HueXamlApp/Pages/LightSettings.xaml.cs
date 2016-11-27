@@ -56,6 +56,7 @@ namespace HueXamlApp.Pages
 
         private void GeneralSlider_OnValueChanged(object sender, RangeBaseValueChangedEventArgs rangeBaseValueChangedEventArgs)
         {
+            //TODO: needs to work without timers and just when you leave the pointer.
             Debug.WriteLine("Error");
             if (!_changeTimer.IsEnabled) { _changeTimer.Start(); }
             _changeAmount++;
@@ -84,15 +85,13 @@ namespace HueXamlApp.Pages
             var strings = text.Split(',');
             foreach (var s in strings)
             {
-                int index;
-                if (!int.TryParse(s, out index)) return;
+                int index;  
+                if (!int.TryParse(s, out index)) continue;
                 index++;
                 _indexes.Add(index);
             }
 
-            if (_indexes.Count != 1) return;
-
-            var lighty = HueConnector.Lights.ElementAt(0);
+            var lighty = HueConnector.Lights.ElementAt(_indexes.ElementAt(0) - 1);
 
             SaturationSlider.Value = lighty.S;
             HueSlider.Value = lighty.H;

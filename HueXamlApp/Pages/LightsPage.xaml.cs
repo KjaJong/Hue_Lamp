@@ -89,23 +89,21 @@ namespace HueXamlApp.Pages
         private void Party()
         {
             Random rnd = new Random();
-            List<int> newValues = new List<int>(3);
 
-            for (int i = 0; i < 20 /*Now a magic number, dunno if it should be anything else though.*/; i++)
+            for (int i = 1; i <= HueConnector.Lights.Count; i++) 
             {
-                newValues[0] = rnd.Next(65535);
-                newValues[1] = rnd.Next(255);
-                newValues[2] = rnd.Next(255);
+                List<int> newValues = new List<int>();
+                newValues.Add(rnd.Next(65535));
+                newValues.Add(rnd.Next(255));
+                newValues.Add(rnd.Next(255));
 
-                foreach (var l in _lights)
+                Connection.Connector.ChangeLight(i, new
                 {
-                    Connection.Connector.ChangeLight(i, new
-                    {
-                        hue = newValues[0],
-                        sat = newValues[1],
-                        bri = newValues[2]
-                    });
-                }
+                    hue = newValues[0],
+                    sat = newValues[1],
+                    bri = newValues[2]
+                });
+
             }
         }
 
@@ -118,7 +116,6 @@ namespace HueXamlApp.Pages
                 if(_partyAllowed) { Party();}
                 Debug.WriteLine("TICK TOCK MOTHAFOCKA");
             };
-
             return t;
         }
     }

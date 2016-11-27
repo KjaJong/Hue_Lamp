@@ -38,9 +38,16 @@
                  SelectionChanged="MyListBox_OnSelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Path=Id}" 
-                               Foreground="{Binding Path=MyBrush}"
-                               HorizontalAlignment="Center"/>
+                    <RelativePanel>
+                        <Rectangle Fill="{Binding Path=MyBrush}" 
+                                   Name="Rect"
+                                   Margin="20,0,20,0"
+                                   Width="20"
+                                   Height="20"/>
+                        <TextBlock Text="{Binding Path=Id}" 
+                                   RelativePanel.RightOf="Rect"
+                                   RelativePanel.AlignBottomWith="Rect"/>
+                    </RelativePanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
