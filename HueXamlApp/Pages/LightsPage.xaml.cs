@@ -63,6 +63,9 @@ namespace HueXamlApp.Pages
                 case "refresh":
                     await Connection.Connector.GetLights();
                     break;
+                case "party":
+                    //TODO: do your thing Menno
+                    break;
                 default:
                     Debug.WriteLine("You're not suposse to be here.");
                     break;

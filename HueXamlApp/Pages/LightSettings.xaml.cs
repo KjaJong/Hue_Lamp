@@ -29,17 +29,11 @@ namespace HueXamlApp.Pages
     public sealed partial class LightSettings
     {
         private readonly List<int> _indexes;
-        private int _lastSaturation;
-        private int _lastHue;
-        private int _lastBrightNess;
 
         public LightSettings()
         {
             this.InitializeComponent();
             _indexes = new List<int>();
-            _lastBrightNess = 0;
-            _lastHue = 0;
-            _lastSaturation = 0;
         }
 
         private void GeneralSlider_OnDragLeave(object sender, RangeBaseValueChangedEventArgs rangeBaseValueChangedEventArgs)
@@ -47,28 +41,13 @@ namespace HueXamlApp.Pages
             //TODO: Make this a feminazi that triggers and doesn't update every fucking time
             Debug.WriteLine("Error");
 
-            switch (((Slider) sender).Tag.ToString().ToLower())
-            {
-                case "hue":
-                    _lastHue = (int)((Slider)sender).Value;
-                    break;
-
-                case "saturation":
-                    _lastSaturation = (int)((Slider)sender).Value;
-                    break;
-
-                case "brightness":
-                    _lastBrightNess = (int)((Slider) sender).Value;
-                    break;
-            }
-
             foreach (var i in _indexes)
             {
                 Connection.Connector.ChangeLight(i, new
                 {
-                    hue = _lastHue,
-                    sat = _lastSaturation,
-                    bri = _lastBrightNess
+                    hue = HueSlider.Value,
+                    sat = SaturationSlider.Value,
+                    bri = BrightnessSlider.Value
                 });
             }
         }
@@ -102,13 +81,9 @@ namespace HueXamlApp.Pages
 
             var lighty = HueConnector.Lights.ElementAt(0);
 
-            _lastHue = lighty.H;
-            _lastSaturation = lighty.S;
-            _lastBrightNess = lighty.V;
-
-            SaturationSlider.Value = _lastSaturation;
-            HueSlider.Value = _lastHue;
-            BrightnessSlider.Value = _lastBrightNess;
+            SaturationSlider.Value = lighty.S;
+            HueSlider.Value = lighty.H;
+            BrightnessSlider.Value = lighty.V;
             Toggle.IsOn = lighty.IsOn;
         }
 
