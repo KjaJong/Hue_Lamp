@@ -25,7 +25,6 @@ namespace HueXamlApp.Pages
     /// </summary>
     public sealed partial class LightsPage : Page
     {
-        private readonly ObservableCollection<Light> _lights;
         private bool _isListBoxSelected;
         private readonly DispatcherTimer _partyTimer;
         private bool _partyAllowed;
@@ -33,8 +32,7 @@ namespace HueXamlApp.Pages
         public LightsPage()
         {
             this.InitializeComponent();
-            _lights = HueConnector.Lights;
-            MyListBox.ItemsSource = _lights;
+            MyListBox.ItemsSource = HueConnector.Lights;
             UserBlock.Text = Connection.Connector.FakeUsername;
             _partyTimer = DefineTimer();
             _partyTimer.Start();
@@ -50,7 +48,7 @@ namespace HueXamlApp.Pages
                     if (!_isListBoxSelected) return;
 
                     var lighties = MyListBox.SelectedItems;
-                    string index = "";
+                    var index = "";
 
                     foreach (var lighty in lighties)
                     {
@@ -90,12 +88,9 @@ namespace HueXamlApp.Pages
         {
             Random rnd = new Random();
 
-            for (int i = 1; i <= HueConnector.Lights.Count; i++) 
+            for (var i = 1; i <= HueConnector.Lights.Count; i++) 
             {
-                List<int> newValues = new List<int>();
-                newValues.Add(rnd.Next(65535));
-                newValues.Add(rnd.Next(255));
-                newValues.Add(rnd.Next(255));
+                var newValues = new List<int> {rnd.Next(65535), rnd.Next(255), rnd.Next(255)};
 
                 Connection.Connector.ChangeLight(i, new
                 {
