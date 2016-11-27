@@ -29,29 +29,43 @@ namespace HueXamlApp.Pages
     public sealed partial class LightSettings
     {
         private readonly List<int> _indexes;
+        private int _changeAmount;
+        private readonly DispatcherTimer _changeTimer;
 
         public LightSettings()
         {
             this.InitializeComponent();
             _indexes = new List<int>();
+            _changeAmount = 0;
+            _changeTimer = DefineTimer();
         }
 
-        private void GeneralSlider_OnDragLeave(object sender, RangeBaseValueChangedEventArgs rangeBaseValueChangedEventArgs)
+        private DispatcherTimer DefineTimer()
+        {
+            DispatcherTimer t = new DispatcherTimer();
+            t.Interval = new TimeSpan(0, 0, 0, 5); //Sets a five second timer
+            t.Tick += (s, e) => //Sets the tick event that goes of after every interval
+            {
+                UpdateLamp();
+                Debug.WriteLine("TICK TOCK MOTHAFOCKA");
+                t.Stop();
+            };
+
+            return t;
+        }
+
+        private void GeneralSlider_OnValueChanged(object sender, RangeBaseValueChangedEventArgs rangeBaseValueChangedEventArgs)
         {
             //TODO: Make this a feminazi that triggers and doesn't update every fucking time
             Debug.WriteLine("Error");
+            if (!_changeTimer.IsEnabled) { _changeTimer.Start(); }
+            _changeAmount++;
 
-            foreach (var i in _indexes)
+            if (_changeAmount >= 809) //geeft ongeveer 81 request voor een hele slide. 
             {
-                Connection.Connector.ChangeLight(i, new
-                {
-                    hue = HueSlider.Value,
-                    sat = SaturationSlider.Value,
-                    bri = BrightnessSlider.Value
-                });
+                UpdateLamp();
             }
         }
-
 
         private void Button_OnClick(object sender, RoutedEventArgs e)
         {
@@ -94,6 +108,19 @@ namespace HueXamlApp.Pages
                 Connection.Connector.ChangeLight(i, new
                 {
                     on = Toggle.IsOn
+                });
+            }
+        }
+
+        private void UpdateLamp()
+        {
+            foreach (var i in _indexes)
+            {
+                Connection.Connector.ChangeLight(i, new
+                {
+                    hue = HueSlider.Value,
+                    sat = SaturationSlider.Value,
+                    bri = BrightnessSlider.Value
                 });
             }
         }

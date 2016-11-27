@@ -64,7 +64,7 @@ namespace HueXamlApp.Pages
                     await Connection.Connector.GetLights();
                     break;
                 case "party":
-                    //TODO: do your thing Menno
+                    Party();
                     break;
                 default:
                     Debug.WriteLine("You're not suposse to be here.");
@@ -75,6 +75,29 @@ namespace HueXamlApp.Pages
         private void MyListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _isListBoxSelected = true;
+        }
+
+        private void Party()
+        {
+            Random rnd = new Random();
+            List<int> newValues = new List<int>(3);
+
+            for (int i = 0; i < 20 /*Now a magic number, dunno if it should be anything else though.*/; i++)
+            {
+                newValues[0] = rnd.Next(65535);
+                newValues[1] = rnd.Next(255);
+                newValues[2] = rnd.Next(255);
+
+                foreach (var l in _lights)
+                {
+                    Connection.Connector.ChangeLight(i, new
+                    {
+                        hue = newValues[0],
+                        sat = newValues[1],
+                        bri = newValues[2]
+                    });
+                }
+            }
         }
     }
 }
