@@ -56,7 +56,6 @@ namespace HueXamlApp.Pages
 
         private void GeneralSlider_OnValueChanged(object sender, RangeBaseValueChangedEventArgs rangeBaseValueChangedEventArgs)
         {
-            //TODO: Make this a feminazi that triggers and doesn't update every fucking time
             Debug.WriteLine("Error");
             if (!_changeTimer.IsEnabled) { _changeTimer.Start(); }
             _changeAmount++;

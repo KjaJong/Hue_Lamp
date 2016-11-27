@@ -54,18 +54,22 @@ namespace HueXamlApp.Pages
                     Frame.Navigate(typeof(LightSettings), index);
                     
                     break;
+
                 case "back":
                     if (Frame.CanGoBack)
                     {
                         Frame.GoBack();
                     }
                     break;
+
                 case "refresh":
                     await Connection.Connector.GetLights();
                     break;
+
                 case "party":
                     Party();
                     break;
+
                 default:
                     Debug.WriteLine("You're not suposse to be here.");
                     break;
