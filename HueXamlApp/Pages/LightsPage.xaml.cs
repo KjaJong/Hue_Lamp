@@ -26,6 +26,7 @@ namespace HueXamlApp.Pages
     public sealed partial class LightsPage : Page
     {
         private bool _isListBoxSelected;
+        private readonly DispatcherTimer _partyTimer;
         private bool _partyAllowed;
 
         public LightsPage()
@@ -33,9 +34,7 @@ namespace HueXamlApp.Pages
             this.InitializeComponent();
             MyListBox.ItemsSource = HueConnector.Lights;
             UserBlock.Text = Connection.Connector.FakeUsername;
-            var partyTimer = DefineTimer();
-            partyTimer.Start();
-            _partyAllowed = false;
+            _partyTimer = DefineTimer();
         }
 
         private async void Button_OnClick(object sender, RoutedEventArgs e)
@@ -70,6 +69,13 @@ namespace HueXamlApp.Pages
 
                 case "party":
                     _partyAllowed = !_partyAllowed;
+
+                    if (!_partyAllowed)
+                    {
+                        _partyTimer.Stop();
+                        await Connection.Connector.GetLights();
+                    }
+                    else _partyTimer.Start();
                     break;
 
                 default:
@@ -103,11 +109,10 @@ namespace HueXamlApp.Pages
 
         private DispatcherTimer DefineTimer()
         {
-            DispatcherTimer t = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 1)};//Sets a two second timer
+            DispatcherTimer t = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 0, 500)};//Sets a two second timer
             t.Tick += (s, e) => //Sets the tick event that goes of after every interval
             {
-                if(_partyAllowed) { Party();}
-                Debug.WriteLine("TICK TOCK MOTHAFOCKA");
+                Party();
             };
             return t;
         }
