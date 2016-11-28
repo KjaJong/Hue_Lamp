@@ -82,6 +82,14 @@ namespace HueXamlApp.Pages
                     else _partyTimer.Start();
                     break;
 
+                case "none":
+                    MyListBox.SelectedIndex = -1;
+                    break;
+
+                case "all":
+                    MyListBox.SelectAll();
+                    break;
+
                 default:
                     Debug.WriteLine("You're not suposse to be here.");
                     break;

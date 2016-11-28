@@ -87,6 +87,16 @@
                               Label="Refresh"
                               Tag="Refresh"
                               Click="Button_OnClick"/>
+                
+                <AppBarButton Name="AllBbutton"
+                              Label="All"
+                              Tag="All"
+                              Click="Button_OnClick"/>
+
+                <AppBarButton Name="NoneBbutton"
+                              Label="None"
+                              Tag="None"
+                              Click="Button_OnClick"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
         
