@@ -36,19 +36,30 @@
                                Style="{StaticResource MyTextblockStyle}"
                                Margin="0,20,0,0"/>
                 <TextBox Name="IpTextBox" 
-                             Text="http://localhost:80/api/" 
+                             Text="http://145.48.205.33/api/iYrmsQq1wu5FxF9CPqpJCnm1GpPVylKBWDUsNDhB"
                              Margin="10,20,0,0"
                              RelativePanel.RightOf="NameBlock"
                              RelativePanel.Below="UsernameTextBox"/>
             </RelativePanel>
+        <RelativePanel Grid.Row="2"
+                       HorizontalAlignment="Center">
+            
         <Button Name="ConnectionButton"
-                            Grid.Row="2"
                             FontFamily="Segoe UI"
                             FontSize="18"
-                            Content="Connect"
+                            Content="Sign in"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top"
-                            Margin="0,20,0,0"
+                            Margin="0,20,20,0"
                             Click="ConnectionButton_OnClick"/>
+            
+        <Button Name="LoginButton"
+                RelativePanel.RightOf="ConnectionButton"
+                Margin="0,20,0,0"
+                FontFamily="Segoe UI"
+                FontSize="18"
+                Content="Login"
+                Click="ConnectionButton_OnClick"/>
+        </RelativePanel>
     </Grid>
 </Page>

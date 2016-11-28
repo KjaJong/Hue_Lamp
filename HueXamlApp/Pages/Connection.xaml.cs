@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -35,8 +36,22 @@ namespace HueXamlApp.Pages
         private async void ConnectionButton_OnClick(object sender, RoutedEventArgs e)
         {
             if (UsernameTextBox.Text == "") return;
-            Connector = new HueConnector(IpTextBox.Text, UsernameTextBox.Text);
-            await Connector.Login();
+
+            var thingy = (Button) sender;
+            switch (thingy.Name.ToLower())
+            {
+                case "connectionbutton":
+                    Connector = new HueConnector(IpTextBox.Text, UsernameTextBox.Text);
+                    await Connector.Login();
+                    break;
+                case "loginbutton":
+                    Connector = new HueConnector(IpTextBox.Text) {FakeUsername = UsernameTextBox.Text};
+                    await Connector.GetLights();
+                    break;
+                default:
+                    Debug.WriteLine("You're not suppose to be here");
+                    break;
+            }
             Frame.Navigate(typeof(LightsPage));
         }
     }

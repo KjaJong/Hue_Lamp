@@ -59,7 +59,6 @@ namespace HueXamlApp.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            _indexes.Clear();
             var text = e.Parameter as string;
 
             if (text == null) return;
