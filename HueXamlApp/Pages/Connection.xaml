@@ -39,7 +39,8 @@
                              Text="http://145.48.205.33/api/iYrmsQq1wu5FxF9CPqpJCnm1GpPVylKBWDUsNDhB"
                              Margin="10,20,0,0"
                              RelativePanel.RightOf="NameBlock"
-                             RelativePanel.Below="UsernameTextBox"/>
+                             RelativePanel.Below="UsernameTextBox"
+                             MaxWidth="167"/>
             </RelativePanel>
         <RelativePanel Grid.Row="2"
                        HorizontalAlignment="Center">
