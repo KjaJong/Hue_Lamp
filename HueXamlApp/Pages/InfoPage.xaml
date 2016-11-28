@@ -1,0 +1,70 @@
+﻿<Page
+    x:Class="HueXamlApp.Pages.InfoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HueXamlApp.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources> 
+        <Style x:Key="BlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="20,10,20,0"/>
+        </Style>
+    </Page.Resources>
+    
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock FontSize="18"
+                   FontWeight="Bold"
+                   Text="Info screen"
+                   Margin="20,0,0,0"/>
+        
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Text="Username: "
+                       Style="{StaticResource BlockStyle}"
+                       Grid.Row="0"
+                       Grid.Column="0"/>
+
+            <TextBlock Text="HueID: "
+                       Style="{StaticResource BlockStyle}"
+                       Grid.Row="1"
+                       Grid.Column="0"/>
+
+            <TextBlock Name="UsernameBlock"
+                       Style="{StaticResource BlockStyle}"
+                       Grid.Row="0"
+                       Grid.Column="1"/>
+
+            <TextBlock Name="HueIdBlock"
+                       Style="{StaticResource BlockStyle}"
+                       Grid.Row="1"
+                       Grid.Column="1"/>
+        </Grid>
+
+        <Button Name="BackButton"
+                Grid.Row="2"
+                Click="Button_OnClick"
+                FontSize="24"
+                Content="&#59440;"
+                FontFamily="segoe mdl2 assets"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Left"/>
+    </Grid>
+</Page>

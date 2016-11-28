@@ -67,6 +67,10 @@ namespace HueXamlApp.Pages
                     await Connection.Connector.GetLights();
                     break;
 
+                case "info":
+                    Frame.Navigate(typeof(InfoPage));
+                    break;
+
                 case "party":
                     _partyAllowed = !_partyAllowed;
 
@@ -109,7 +113,7 @@ namespace HueXamlApp.Pages
 
         private DispatcherTimer DefineTimer()
         {
-            DispatcherTimer t = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 0, 500)};//Sets a two second timer
+            DispatcherTimer t = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 1)};//Sets a two second timer
             t.Tick += (s, e) => //Sets the tick event that goes of after every interval
             {
                 Party();

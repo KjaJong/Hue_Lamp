@@ -21,14 +21,11 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
-        <RelativePanel Grid.Row="0">
-            <TextBlock FontSize="18"
+        
+        <TextBlock FontSize="18"
                        FontWeight="Bold"
                        Text="Hue lights screen"
-                       RelativePanel.AlignBottomWithPanel="True"
                        Margin="10,0,0,0"/>
-        </RelativePanel>
 
         <ListBox Name="MyListBox" 
                  Grid.Row="1"
@@ -79,7 +76,12 @@
                               Label="Party"
                               Tag="Party"
                               Click="Button_OnClick"/>
-                
+
+                <AppBarButton Name="InfoButton"
+                              Label="Info"
+                              Tag="Info"
+                              Click="Button_OnClick"/>
+
                 <AppBarButton Name="RefreshButton"
                               Icon="Refresh"
                               Label="Refresh"
