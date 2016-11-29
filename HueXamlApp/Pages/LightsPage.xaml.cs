@@ -85,9 +85,9 @@ namespace HueXamlApp.Pages
                 case "name":
                     for (var i = 1; i <= HueConnector.Lights.Count; i++)
                     {
-                        Connection.Connector.ChangeNameLight(i, new
+                        await Connection.Connector.ChangeNameLight(i, new
                         {
-                            name = "#Blamebart"
+                            name = RandomName()
                         });
                     }
                     await Connection.Connector.GetLights();
@@ -122,7 +122,7 @@ namespace HueXamlApp.Pages
             }
         }
 
-        private DispatcherTimer DefineTimer()
+        private static DispatcherTimer DefineTimer()
         {
             var t = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 1)};//Sets a two second timer
             t.Tick += (s, e) => //Sets the tick event that goes of after every interval
@@ -138,6 +138,20 @@ namespace HueXamlApp.Pages
 
             if (lighties.Count <= HueConnector.Lights.Count/2) MyListBox.SelectAll();
             else MyListBox.SelectedIndex = -1;
+        }
+
+        private static string RandomName()
+        {
+            var rnd = new Random();
+
+            string[] strings = {
+                "#BlameBart",
+                "#HomuraDidNothingWring",
+                "#GrillTheHam",
+                " ( ͡° ͜ʖ ͡°)"};
+
+            var text = strings[rnd.Next(strings.Length)];
+            return text;
         }
     }
 }

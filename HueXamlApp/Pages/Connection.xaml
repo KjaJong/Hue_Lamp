@@ -41,7 +41,6 @@
                                Style="{StaticResource MyTextblockStyle}"
                                Margin="0,20,0,0"/>
                 <TextBox Name="IpTextBox" 
-                               Text="http://145.48.205.33/api/iYrmsQq1wu5FxF9CPqpJCnm1GpPVylKBWDUsNDhB"
                                Margin="10,20,0,0"
                                RelativePanel.RightOf="NameBlock"
                                RelativePanel.Below="UsernameTextBox"
