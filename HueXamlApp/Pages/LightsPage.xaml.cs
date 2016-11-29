@@ -148,7 +148,18 @@ namespace HueXamlApp.Pages
                 "#BlameBart",
                 "#HomuraDidNothingWring",
                 "#GrillTheHam",
-                " ( ͡° ͜ʖ ͡°)"};
+                " ( ͡° ͜ʖ ͡°)",
+                "NEVER",
+                "GONNA",
+                "GIVE",
+                "YOU",
+                "UP",
+                "LET",
+                "YOU",
+                "DOWN",
+                "#RemBestGrill",
+                "#ILoveEmillia"
+            };
 
             var text = strings[rnd.Next(strings.Length)];
             return text;
