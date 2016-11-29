@@ -101,10 +101,10 @@ namespace HueXamlApp.Pages
 
         private void MyListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            _isListBoxSelected = true;
+            _isListBoxSelected = MyListBox.SelectedItems.Count != 0;
         }
 
-        private static void Party()
+        private async void Party()
         {
             var rnd = new Random();
 
@@ -112,7 +112,7 @@ namespace HueXamlApp.Pages
             {
                 var newValues = new List<int> {rnd.Next(65535)};
 
-                Connection.Connector.ChangeLight(i, new
+                await Connection.Connector.ChangeLight(i, new
                 {
                     hue = newValues[0],
                     sat = 254,
@@ -122,7 +122,7 @@ namespace HueXamlApp.Pages
             }
         }
 
-        private static DispatcherTimer DefineTimer()
+        private DispatcherTimer DefineTimer()
         {
             var t = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 1)};//Sets a two second timer
             t.Tick += (s, e) => //Sets the tick event that goes of after every interval
