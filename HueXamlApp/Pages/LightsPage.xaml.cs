@@ -82,12 +82,15 @@ namespace HueXamlApp.Pages
                     else _partyTimer.Start();
                     break;
 
-                case "none":
-                    MyListBox.SelectedIndex = -1;
-                    break;
-
-                case "all":
-                    MyListBox.SelectAll();
+                case "name":
+                    for (var i = 1; i <= HueConnector.Lights.Count; i++)
+                    {
+                        await Connection.Connector.ChangeNameLight(i, new
+                        {
+                            name = RandomName()
+                        });
+                    }
+                    await Connection.Connector.GetLights();
                     break;
 
                 default:
@@ -101,32 +104,54 @@ namespace HueXamlApp.Pages
             _isListBoxSelected = true;
         }
 
-        private void Party()
+        private static void Party()
         {
             var rnd = new Random();
 
             for (var i = 1; i <= HueConnector.Lights.Count; i++) 
             {
-                var newValues = new List<int> {rnd.Next(65535), rnd.Next(255), rnd.Next(255)};
+                var newValues = new List<int> {rnd.Next(65535)};
 
                 Connection.Connector.ChangeLight(i, new
                 {
                     hue = newValues[0],
-                    sat = newValues[1],
-                    bri = newValues[2]
+                    sat = 254,
+                    bri = 254
                 });
 
             }
         }
 
-        private DispatcherTimer DefineTimer()
+        private static DispatcherTimer DefineTimer()
         {
-            DispatcherTimer t = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 1)};//Sets a two second timer
+            var t = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 1)};//Sets a two second timer
             t.Tick += (s, e) => //Sets the tick event that goes of after every interval
             {
                 Party();
             };
             return t;
+        }
+
+        private void MyListBox_OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            var lighties = MyListBox.SelectedItems;
+
+            if (lighties.Count <= HueConnector.Lights.Count/2) MyListBox.SelectAll();
+            else MyListBox.SelectedIndex = -1;
+        }
+
+        private static string RandomName()
+        {
+            var rnd = new Random();
+
+            string[] strings = {
+                "#BlameBart",
+                "#HomuraDidNothingWring",
+                "#GrillTheHam",
+                " ( ͡° ͜ʖ ͡°)"};
+
+            var text = strings[rnd.Next(strings.Length)];
+            return text;
         }
     }
 }

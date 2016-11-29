@@ -40,6 +40,11 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <TextBlock Grid.Row="0"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   Text="Light settings"/>
+        
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

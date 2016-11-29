@@ -21,12 +21,13 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock FontSize="18"
+        <TextBlock FontSize="24"
                    FontWeight="Bold"
-                   Text="Info screen"
-                   Margin="20,0,0,0"/>
-        
-        <Grid Grid.Row="1">
+                   Text="User info"/>
+        <ScrollViewer Grid.Row="1"
+                      HorizontalScrollBarVisibility="Hidden"
+                      VerticalScrollBarVisibility="Disabled">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -57,6 +58,7 @@
                        Grid.Row="1"
                        Grid.Column="1"/>
         </Grid>
+        </ScrollViewer>
 
         <Button Name="BackButton"
                 Grid.Row="2"
@@ -65,6 +67,7 @@
                 Content="&#59440;"
                 FontFamily="segoe mdl2 assets"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Left"/>
+                HorizontalAlignment="Left"
+                Background="Black"/>
     </Grid>
 </Page>

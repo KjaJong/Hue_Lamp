@@ -22,21 +22,23 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <TextBlock FontSize="18"
-                       FontWeight="Bold"
-                       Text="Hue lights screen"
-                       Margin="10,0,0,0"/>
+        <TextBlock FontSize="24"
+                   FontWeight="Bold"
+                   Text="Hue lights"
+                   Margin="10,0,0,0"/>
 
-        <ListBox Name="MyListBox" 
-                 Grid.Row="1"
-                 HorizontalAlignment="Center"
+        <ScrollViewer Grid.Row="1" 
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Hidden">
+            <ListBox Name="MyListBox"
                  SelectionMode="Multiple"
                  Margin="0,20,0,0"
+                 DoubleTapped="MyListBox_OnDoubleTapped"
                  SelectionChanged="MyListBox_OnSelectionChanged">
-            <ListBox.ItemTemplate>
+                <ListBox.ItemTemplate>
                 <DataTemplate>
                     <RelativePanel>
-                        <Rectangle Fill="{Binding Path=MyBrush}" 
+                        <Rectangle Fill="{Binding Path=MyBrush}"
                                    Name="Rect"
                                    Margin="20,0,20,0"
                                    Width="20"
@@ -48,6 +50,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        </ScrollViewer>
 
         <CommandBar Grid.Row="2" Background="Black">
             <CommandBar.Content>
@@ -62,7 +65,7 @@
             </CommandBar.Content>
             
             <AppBarSeparator/>
-            
+
             <AppBarButton Name="SettingsButton" 
                           Icon="Setting"
                           Tag="Settings"
@@ -86,34 +89,12 @@
                               Label="Refresh"
                               Tag="Refresh"
                               Click="Button_OnClick"/>
-                
-                <AppBarButton Name="AllBbutton"
-                              Label="All"
-                              Tag="All"
+                <AppBarButton Name="NameButton"
+                              Label="Name"
+                              Tag="Name"
                               Click="Button_OnClick"/>
 
-                <AppBarButton Name="NoneBbutton"
-                              Label="None"
-                              Tag="None"
-                              Click="Button_OnClick"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
-        
-        <!--
-        <RelativePanel Grid.Row="2">
-            <Button Name="AddidButton"
-                    Style="{StaticResource MyButtonStyle}"
-                    RelativePanel.AlignRightWithPanel="True"
-                    Content="&#59151;"
-                    Click="AddidButton_OnClick"/>
-
-            <Button Name="AddButton"
-                    Content="&#59152;"
-                    RelativePanel.LeftOf="AddidButton"
-                    Style="{StaticResource MyButtonStyle}"
-                    Click="AddButton_OnClick"/>
-
-        </RelativePanel>
-        -->
     </Grid>
 </Page>
