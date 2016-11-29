@@ -57,6 +57,7 @@
                 <StackPanel Orientation="Horizontal">
                     <AppBarButton Name ="BackButton" 
                           Icon="Back"
+                          Label="Back"
                           Tag="Back"
                           Click="Button_OnClick"/>
                     <AppBarSeparator/>
@@ -68,6 +69,7 @@
 
             <AppBarButton Name="SettingsButton" 
                           Icon="Setting"
+                          Label="Settings"
                           Tag="Settings"
                           Click="Button_OnClick"/>
             <AppBarSeparator/>
@@ -89,6 +91,7 @@
                               Label="Refresh"
                               Tag="Refresh"
                               Click="Button_OnClick"/>
+                
                 <AppBarButton Name="NameButton"
                               Label="Name"
                               Tag="Name"
