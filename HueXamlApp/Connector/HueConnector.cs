@@ -17,16 +17,7 @@ namespace HueXamlApp.Connector
         public string FakeUsername { get; set; }
         public static ObservableCollection<Light> Lights { get; set; }
         private readonly HttpClient _client;
-
-
-        public HueConnector(string adres)
-        {
-            Adres = adres;
-
-            _client = new HttpClient();
-            Lights = new ObservableCollection<Light>();
-        }
-
+        
         public HueConnector(string adres, string username)
         {
             FakeUsername = username;
@@ -56,6 +47,7 @@ namespace HueXamlApp.Connector
                 Debug.WriteLine(e.StackTrace);
             }   
             await GetLights();
+            
         }
 
         public async Task GetLights()
@@ -83,6 +75,7 @@ namespace HueXamlApp.Connector
                 catch (Exception e)
                 {
                     Debug.WriteLine(e.StackTrace);
+                    if (index == 1) FakeUsername = "Login failed";
                     return;
                 }
             }

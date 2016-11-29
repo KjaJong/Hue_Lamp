@@ -17,11 +17,16 @@
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <RelativePanel Grid.Row="1" HorizontalAlignment="center">
+        
+            <TextBlock Text="Light connection"
+                       Style="{StaticResource MyTextblockStyle}"/>
+        
+            <RelativePanel Grid.Row="2" HorizontalAlignment="center">
                 <TextBlock Name="NameBlock"
                                Text="Your username: "
                                Style="{StaticResource MyTextblockStyle}"
@@ -43,25 +48,17 @@
                                MaxWidth="167"
                                MinWidth="167"/>
             </RelativePanel>
-        <RelativePanel Grid.Row="2"
+        <RelativePanel Grid.Row="3"
                        HorizontalAlignment="Center">
             
         <Button Name="ConnectionButton"
                             FontFamily="Segoe UI"
                             FontSize="18"
-                            Content="Sign in"
+                            Content="Connect"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top"
-                            Margin="0,20,20,0"
+                            Margin="20"
                             Click="ConnectionButton_OnClick"/>
-            
-        <Button Name="LoginButton"
-                RelativePanel.RightOf="ConnectionButton"
-                Margin="0,20,0,0"
-                FontFamily="Segoe UI"
-                FontSize="18"
-                Content="Login"
-                Click="ConnectionButton_OnClick"/>
         </RelativePanel>
     </Grid>
 </Page>

@@ -44,10 +44,6 @@ namespace HueXamlApp.Pages
                     Connector = new HueConnector(IpTextBox.Text, UsernameTextBox.Text);
                     await Connector.Login();
                     break;
-                case "loginbutton":
-                    Connector = new HueConnector(IpTextBox.Text) {FakeUsername = UsernameTextBox.Text};
-                    await Connector.GetLights();
-                    break;
                 default:
                     Debug.WriteLine("You're not suppose to be here");
                     break;
