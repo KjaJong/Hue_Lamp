@@ -5,25 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI;
 
-namespace HughRemote.Common
+namespace HueXamlApp.Connector
 {
     public static class ColorUtil
     {
 
-        //public static Color getColor(this Light light)
-        //{
-        //    double hue = ((double)light.Hue * 360.0f) / 65535.0f;
-        //    double sat = (double)light.Saturation / 255.0f;
-        //    double val = (double)light.Value / 255.0f;
+        public static Color getColor(double inputHue, double inputSat, double whatever)
+        {
+            double hue = ((double)inputHue * 360.0f) / 65535.0f;
+            double sat = (double)inputSat / 255.0f;
+            double val = (double)whatever / 255.0f;
 
-        //    int r, g, b;
-        //    HsvToRgb(hue, sat, val, out r, out g, out b);
-        //    return Color.FromArgb(255, Convert.ToByte(r), Convert.ToByte(g), Convert.ToByte(b));
-        //}
+            int r, g, b;
+            HsvToRgb(hue, sat, val, out r, out g, out b);
+            return Color.FromArgb(255, Convert.ToByte(r), Convert.ToByte(g), Convert.ToByte(b));
+        }
 
-            /// <summary>
-            /// The hue decided it doesn't work with normal hsv. So it had to be changed.
-            /// </summary>
+        /// <summary>
+        /// The hue decided it doesn't work with normal hsv. So it had to be changed.
+        /// </summary>
         public static void RGBtoHSV(double r, double g, double b, out double h, out double s, out double v)
         {
             double min, max, delta;

@@ -51,21 +51,20 @@
 
         <CommandBar Grid.Row="2" Background="Black">
             <CommandBar.Content>
-                <StackPanel>
-                    <TextBlock Name="UserBlock"/>
-                </StackPanel>
-            </CommandBar.Content>
-
-            <AppBarButton Name ="BackButton" 
+                <StackPanel Orientation="Horizontal">
+                    <AppBarButton Name ="BackButton" 
                           Icon="Back"
-                          Label ="Back"
                           Tag="Back"
                           Click="Button_OnClick"/>
+                    <AppBarSeparator/>
+                    <TextBlock Name="UserBlock" VerticalAlignment="Center" Margin="0,0,0,16"/>
+                </StackPanel>
+            </CommandBar.Content>
+            
             <AppBarSeparator/>
             
             <AppBarButton Name="SettingsButton" 
                           Icon="Setting"
-                          Label="Settings"
                           Tag="Settings"
                           Click="Button_OnClick"/>
             <AppBarSeparator/>

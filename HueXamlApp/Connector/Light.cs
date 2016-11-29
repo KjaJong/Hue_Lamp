@@ -1,6 +1,6 @@
 ﻿using Windows.UI;
 using Windows.UI.Xaml.Media;
-using HughRemote.Common;
+using HueXamlApp.Connector;
 
 namespace HueXamlApp.Connector
 {
