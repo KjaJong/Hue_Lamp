@@ -82,6 +82,17 @@ namespace HueXamlApp.Pages
                     else _partyTimer.Start();
                     break;
 
+                case "name":
+                    for (var i = 1; i <= HueConnector.Lights.Count; i++)
+                    {
+                        Connection.Connector.ChangeNameLight(i, new
+                        {
+                            name = "#Blamebart"
+                        });
+                    }
+                    await Connection.Connector.GetLights();
+                    break;
+
                 default:
                     Debug.WriteLine("You're not suposse to be here.");
                     break;
@@ -93,19 +104,19 @@ namespace HueXamlApp.Pages
             _isListBoxSelected = true;
         }
 
-        private void Party()
+        private static void Party()
         {
             var rnd = new Random();
 
             for (var i = 1; i <= HueConnector.Lights.Count; i++) 
             {
-                var newValues = new List<int> {rnd.Next(65535), rnd.Next(255), rnd.Next(255)};
+                var newValues = new List<int> {rnd.Next(65535)};
 
                 Connection.Connector.ChangeLight(i, new
                 {
                     hue = newValues[0],
-                    sat = newValues[1],
-                    bri = newValues[2]
+                    sat = 254,
+                    bri = 254
                 });
 
             }
@@ -113,7 +124,7 @@ namespace HueXamlApp.Pages
 
         private DispatcherTimer DefineTimer()
         {
-            DispatcherTimer t = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 1)};//Sets a two second timer
+            var t = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 1)};//Sets a two second timer
             t.Tick += (s, e) => //Sets the tick event that goes of after every interval
             {
                 Party();

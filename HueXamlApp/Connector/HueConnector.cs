@@ -86,5 +86,11 @@ namespace HueXamlApp.Connector
             HttpContent responseMessage = new JsonContent(JsonConvert.SerializeObject(message));
             await _client.PutAsync(Adres + $"/lights/{index}/state", responseMessage);
         }
+
+        public async void ChangeNameLight(int index, dynamic message)
+        {
+            HttpContent responseMessage = new JsonContent(JsonConvert.SerializeObject(message));
+            await _client.PutAsync(Adres + $"/lights/{index}", responseMessage);
+        }
     }
 }
