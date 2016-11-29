@@ -36,11 +36,11 @@ namespace HueXamlApp.Pages
             _indexes = new List<int>();
         }
 
-        private void GeneralSlider_OnValueChanged(object sender, PointerRoutedEventArgs pointerRoutedEventArgs)
+        private  async void GeneralSlider_OnValueChanged(object sender, PointerRoutedEventArgs pointerRoutedEventArgs)
         {
             foreach (var i in _indexes)
             {
-                Connection.Connector.ChangeLight(i, new
+                await Connection.Connector.ChangeLight(i, new
                 {
                     hue = HueSlider.Value,
                     sat = SaturationSlider.Value,
@@ -80,11 +80,11 @@ namespace HueXamlApp.Pages
             Toggle.IsOn = lighty.IsOn;
         }
 
-        private void Toggle_OnToggled(object sender, RoutedEventArgs e)
+        private async void Toggle_OnToggled(object sender, RoutedEventArgs e)
         {
             foreach (var i in _indexes)
             {
-                Connection.Connector.ChangeLight(i, new
+                await Connection.Connector.ChangeLight(i, new
                 {
                     on = Toggle.IsOn
                 });
