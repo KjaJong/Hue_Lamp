@@ -89,6 +89,7 @@
                               Label="Refresh"
                               Tag="Refresh"
                               Click="Button_OnClick"/>
+                
                 <AppBarButton Name="NameButton"
                               Label="Name"
                               Tag="Name"

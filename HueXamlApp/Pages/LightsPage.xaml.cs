@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -46,12 +47,8 @@ namespace HueXamlApp.Pages
                     if (!_isListBoxSelected) return;
 
                     var lighties = MyListBox.SelectedItems;
-                    var index = "";
+                    var index = lighties.Aggregate("", (current, lighty) => current + (HueConnector.Lights.IndexOf((Light) lighty) + ","));
 
-                    foreach (var lighty in lighties)
-                    {
-                      index += HueConnector.Lights.IndexOf((Light)lighty) + ",";
-                    }
                     Frame.Navigate(typeof(LightSettings), index);
                     
                     break;
@@ -104,30 +101,27 @@ namespace HueXamlApp.Pages
             _isListBoxSelected = MyListBox.SelectedItems.Count != 0;
         }
 
-        private async void Party()
+        private async Task Party()
         {
             var rnd = new Random();
 
             for (var i = 1; i <= HueConnector.Lights.Count; i++) 
             {
-                var newValues = new List<int> {rnd.Next(65535)};
-
                 await Connection.Connector.ChangeLight(i, new
                 {
-                    hue = newValues[0],
-                    sat = 254,
-                    bri = 254
-                });
-
+                    hue = rnd.Next(65535),
+                    sat = rnd.Next(255),
+                    bri = rnd.Next(255)
+            });
             }
         }
 
         private DispatcherTimer DefineTimer()
         {
             var t = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 1)};//Sets a two second timer
-            t.Tick += (s, e) => //Sets the tick event that goes of after every interval
+            t.Tick += async (s, e) => //Sets the tick event that goes of after every interval
             {
-                Party();
+                await Party();
             };
             return t;
         }
