@@ -9,6 +9,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Devices.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -47,6 +48,9 @@ namespace HueXamlApp.Pages
                     bri = BrightnessSlider.Value
                 });
             }
+
+            var color = ColorUtil.HsvToRgb(HueSlider.Value, SaturationSlider.Value, BrightnessSlider.Value);
+            Rektangle.Fill = new SolidColorBrush(color);
         }
 
         private async void Button_OnClick(object sender, RoutedEventArgs e)
@@ -78,6 +82,9 @@ namespace HueXamlApp.Pages
             HueSlider.Value = lighty.H;
             BrightnessSlider.Value = lighty.V;
             Toggle.IsOn = lighty.IsOn;
+
+            var color = ColorUtil.HsvToRgb(lighty.H, lighty.S, lighty.V);
+            Rektangle.Fill = new SolidColorBrush(color);
         }
 
         private async void Toggle_OnToggled(object sender, RoutedEventArgs e)
