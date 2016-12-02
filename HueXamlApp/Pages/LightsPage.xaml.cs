@@ -146,13 +146,14 @@ namespace HueXamlApp.Pages
                 "NEVER",
                 "GONNA",
                 "GIVE",
-                "YOU",
+                "HUE",
                 "UP",
                 "LET",
-                "YOU",
                 "DOWN",
                 "#RemBestGrill",
-                "#ILoveEmillia"
+                "#ILoveEmillia",
+                "#ClaimCas",
+                "#KutKoopmans"
             };
 
             var text = strings[rnd.Next(strings.Length)];
