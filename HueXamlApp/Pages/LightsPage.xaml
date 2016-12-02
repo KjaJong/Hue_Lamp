@@ -68,20 +68,20 @@
 
             <AppBarButton Name="SettingsButton" 
                           Icon="Setting"
+                          Label="Setting"
                           Tag="Settings"
                           Click="Button_OnClick"/>
             <AppBarSeparator/>
 
             <AppBarButton Name="NameButton"
                           Icon="Shuffle"
-                          Label="ShuffleNames"
+                          Label="Shuffle"
                           Tag="Name"
                           Click="Button_OnClick"/>
             <AppBarSeparator/>
 
             <CommandBar.SecondaryCommands>
                 <AppBarButton Name="PartyButton"
-                              Icon="Favorite"
                               Label="Party"
                               Tag="Party"
                               Click="Button_OnClick"/>

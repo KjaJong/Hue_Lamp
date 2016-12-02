@@ -93,7 +93,7 @@ namespace HueXamlApp.Pages
             {
                 await Connection.Connector.ChangeLight(i, new
                 {
-                    on = Toggle.IsOn
+                    on = (bool)Toggle.IsOn
                 });
             }
         }

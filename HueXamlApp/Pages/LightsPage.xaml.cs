@@ -110,8 +110,8 @@ namespace HueXamlApp.Pages
                 await Connection.Connector.ChangeLight(i, new
                 {
                     hue = rnd.Next(65535),
-                    sat = rnd.Next(255),
-                    bri = rnd.Next(255)
+                    sat = 255,
+                    bri = 255
             });
             }
         }
@@ -140,7 +140,7 @@ namespace HueXamlApp.Pages
 
             string[] strings = {
                 "#BlameBart",
-                "#HomuraDidNothingWring",
+                "#HomuraDidNothingWrong",
                 "#GrillTheHam",
                 " ( ͡° ͜ʖ ͡°)",
                 "NEVER",
