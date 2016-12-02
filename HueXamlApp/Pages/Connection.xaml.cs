@@ -30,8 +30,8 @@ namespace HueXamlApp.Pages
         public Connection()
         {
             this.InitializeComponent();
-            IpTextBox.Text = "http://145.48.205.33/api/iYrmsQq1wu5FxF9CPqpJCnm1GpPVylKBWDUsNDhB";
-            //IpTextBox.Text = "http://localhost:80/api/";
+            //IpTextBox.Text = "http://145.48.205.33/api/iYrmsQq1wu5FxF9CPqpJCnm1GpPVylKBWDUsNDhB";
+            IpTextBox.Text = "http://localhost:80/api/";
         }
 
         private async void ConnectionButton_OnClick(object sender, RoutedEventArgs e)
