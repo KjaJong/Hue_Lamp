@@ -72,6 +72,13 @@
                           Click="Button_OnClick"/>
             <AppBarSeparator/>
 
+            <AppBarButton Name="NameButton"
+                          Icon="Shuffle"
+                          Label="ShuffleNames"
+                          Tag="Name"
+                          Click="Button_OnClick"/>
+            <AppBarSeparator/>
+
             <CommandBar.SecondaryCommands>
                 <AppBarButton Name="PartyButton"
                               Icon="Favorite"
@@ -85,14 +92,8 @@
                               Click="Button_OnClick"/>
 
                 <AppBarButton Name="RefreshButton"
-                              Icon="Refresh"
                               Label="Refresh"
                               Tag="Refresh"
-                              Click="Button_OnClick"/>
-                
-                <AppBarButton Name="NameButton"
-                              Label="Name"
-                              Tag="Name"
                               Click="Button_OnClick"/>
 
             </CommandBar.SecondaryCommands>
