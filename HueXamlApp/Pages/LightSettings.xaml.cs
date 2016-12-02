@@ -43,9 +43,9 @@ namespace HueXamlApp.Pages
             {
                 await Connection.Connector.ChangeLight(i, new
                 {
-                    hue = HueSlider.Value,
-                    sat = SaturationSlider.Value,
-                    bri = BrightnessSlider.Value
+                    hue = (int)HueSlider.Value,
+                    sat = (int)SaturationSlider.Value,
+                    bri = (int)BrightnessSlider.Value
                 });
             }
 

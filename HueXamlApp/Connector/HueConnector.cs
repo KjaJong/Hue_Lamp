@@ -70,6 +70,7 @@ namespace HueXamlApp.Connector
                         (bool) message.state.on,
                         (string) message.name
                     ));
+
                     index++;
                 }
                 catch (Exception e)
