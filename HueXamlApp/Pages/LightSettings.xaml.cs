@@ -35,9 +35,11 @@ namespace HueXamlApp.Pages
         {
             this.InitializeComponent();
             _indexes = new List<int>();
+            HueSlider.Background = RainbowBrushAfterButton();
+            HueSlider.Foreground = RainbowBrushBeforeButton();
         }
 
-        private  async void GeneralSlider_OnValueChanged(object sender, PointerRoutedEventArgs pointerRoutedEventArgs)
+        private async void GeneralSlider_OnValueChanged(object sender, PointerRoutedEventArgs pointerRoutedEventArgs)
         {
             foreach (var i in _indexes)
             {
@@ -96,6 +98,26 @@ namespace HueXamlApp.Pages
                     on = Toggle.IsOn
                 });
             }
+        }
+
+        private LinearGradientBrush RainbowBrushAfterButton()
+        {
+            GradientStopCollection gsc = new GradientStopCollection();
+            for (int i = 0; i < 100; i++)
+            {
+                gsc.Add(new GradientStop() {Color = ColorUtil.getColor(655.35*i, 254, 254), Offset = i/100.0});
+            }
+            return new LinearGradientBrush(gsc, 0);
+        }
+
+        private LinearGradientBrush RainbowBrushBeforeButton()
+        {
+            GradientStopCollection gsc = new GradientStopCollection();
+            for (int i = 0; i < (int)HueSlider.Value; i++)
+            {
+                gsc.Add(new GradientStop() { Color = ColorUtil.getColor(655.35 * i, 254, 254), Offset = i / 100.0 });
+            }
+            return new LinearGradientBrush(gsc, 0);
         }
     }
 }

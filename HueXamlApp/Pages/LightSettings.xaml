@@ -21,7 +21,6 @@
             <Setter Property="Margin" Value="20"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="Background" Value="Azure"/>
             <Setter Property="Minimum" Value="0"/>
             <Setter Property="Grid.Column" Value="1"/>
         </Style>
@@ -68,9 +67,11 @@
                     PointerCaptureLost="GeneralSlider_OnValueChanged" 
                     Style="{StaticResource SliderLayout}"/>
             <Slider Name="SaturationSlider" Maximum="255" Grid.Row="1" Tag="Saturation" 
-                    PointerCaptureLost="GeneralSlider_OnValueChanged" Style="{StaticResource SliderLayout}"/>
+                    PointerCaptureLost="GeneralSlider_OnValueChanged" 
+                    Style="{StaticResource SliderLayout}"/>
             <Slider Name="BrightnessSlider" Maximum="255" Grid.Row="2" Tag="Brightness"
-                    PointerCaptureLost="GeneralSlider_OnValueChanged" Style="{StaticResource SliderLayout}"/>
+                    PointerCaptureLost="GeneralSlider_OnValueChanged" 
+                    Style="{StaticResource SliderLayout}"/>
             <ToggleSwitch Toggled="Toggle_OnToggled" Name="Toggle" Grid.Row="3"
                           Grid.Column="1" Margin="20,0,0,0"/>
             <Rectangle Name="Rektangle" 
